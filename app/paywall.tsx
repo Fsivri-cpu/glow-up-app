@@ -147,12 +147,7 @@ export default function PaywallScreen({ onClose }: PaywallScreenProps) {
 
 
 
-        {/* Terms and Conditions */}
-        <Text style={styles.termsText}>
-          By continuing, you agree to our Terms of Service and Privacy Policy. 
-          Subscription automatically renews unless auto-renew is turned off at 
-          least 24 hours before the end of the current period.
-        </Text>
+
       </ScrollView>
     </SafeAreaView>
   );
