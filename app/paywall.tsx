@@ -197,7 +197,7 @@ export default function PaywallScreen({ onClose }: PaywallScreenProps) {
               </View>
             </Animated.View>
 
-            {/* Pricing Cards */}
+            {/* Pricing Cards with CTA Button */}
             <Animated.View
               style={{ width: '100%', alignItems: 'center' }}
               entering={FadeInDown.delay(600).duration(600)}
@@ -205,20 +205,15 @@ export default function PaywallScreen({ onClose }: PaywallScreenProps) {
               <PricingCards
                 selectedPlan={selectedPlan}
                 onSelectPlan={setSelectedPlan}
+                onSubscribe={handleSubscribe}
               />
             </Animated.View>
-
-            {/* CTA Button */}
+            
+            {/* Maybe Later Button */}
             <Animated.View 
-              style={styles.ctaContainer}
+              style={styles.dismissContainer}
               entering={FadeInDown.delay(900).duration(600)}
             >
-              <Button
-                title={`Continue with ${selectedPlan === 'yearly' ? 'Yearly' : 'Weekly'} Plan`}
-                onPress={handleSubscribe}
-                isLoading={isLoading}
-                style={styles.subscribeButton}
-              />
               <Pressable 
                 onPress={handleDismiss}
                 style={styles.dismissButton}
@@ -319,16 +314,10 @@ const styles = StyleSheet.create({
     flex: 1,
     lineHeight: 24,
   },
-  ctaContainer: {
+  dismissContainer: {
     width: '100%',
     alignItems: 'center',
-    marginTop: 16,
-  },
-  subscribeButton: {
-    width: '100%',
-    height: 56,
-    backgroundColor: '#B56DA5',
-    borderRadius: 28,
+    marginTop: 8,
   },
   dismissButton: {
     padding: 12,
