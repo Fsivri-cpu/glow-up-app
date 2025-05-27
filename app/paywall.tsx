@@ -145,18 +145,7 @@ export default function PaywallScreen({ onClose }: PaywallScreenProps) {
           />
         </Animated.View>
 
-        {/* Maybe Later Button */}
-        <Animated.View 
-          style={styles.dismissContainer}
-          entering={FadeInDown.delay(900).duration(600)}
-        >
-          <Pressable 
-            onPress={handleDismiss}
-            style={styles.dismissButton}
-          >
-            <Text style={styles.dismissText}>Maybe later</Text>
-          </Pressable>
-        </Animated.View>
+
 
         {/* Terms and Conditions */}
         <Text style={styles.termsText}>
