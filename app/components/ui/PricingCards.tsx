@@ -64,16 +64,18 @@ export default function PricingCards({ selectedPlan, onSelectPlan, onSubscribe }
         <View style={styles.cardContent}>
           <View style={styles.planTitleContainer}>
             <Text style={styles.planTitle}>Yearly Plan</Text>
+            <Text style={styles.yearlyPrice}>$44.99/year</Text>
+          </View>
+          
+          <View style={styles.saveBadgeContainer}>
+            <View style={styles.saveBadge}>
+              <Text style={styles.saveBadgeText}>SAVE 46%</Text>
+            </View>
           </View>
           
           <View style={styles.priceContainer}>
             <Text style={styles.planPrice}>$3.75/month</Text>
-            <Text style={styles.yearlyPrice}>$44.99/year</Text>
             <Text style={styles.trialInfo}>7 Days Free Trial</Text>
-          </View>
-          
-          <View style={styles.saveBadge}>
-            <Text style={styles.saveBadgeText}>SAVE 46%</Text>
           </View>
         </View>
       </Pressable>
@@ -170,6 +172,8 @@ const styles = StyleSheet.create({
   },
   planTitleContainer: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
   },
   planTitle: {
     fontFamily: 'Manrope',
@@ -180,6 +184,11 @@ const styles = StyleSheet.create({
   priceContainer: {
     flex: 1,
     alignItems: 'flex-end',
+  },
+  saveBadgeContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   planPrice: {
     fontFamily: 'Inter',
@@ -196,8 +205,9 @@ const styles = StyleSheet.create({
   trialInfo: {
     fontFamily: 'Inter',
     fontSize: 12,
-    color: '#666666',
+    color: '#D671A1',
     marginTop: 4,
+    fontWeight: '500',
   },
   billingInfo: {
     fontFamily: 'Inter',
@@ -206,13 +216,12 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   saveBadge: {
-    position: 'absolute',
-    top: 16,
-    right: 16,
     backgroundColor: '#D671A1',
-    paddingHorizontal: 10,
-    paddingVertical: 4,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
     borderRadius: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   saveBadgeText: {
     fontFamily: 'Inter',
