@@ -55,7 +55,11 @@ export default function PricingCards({ selectedPlan, onSelectPlan, onSubscribe }
       
       {/* Yearly Plan Card */}
       <Pressable 
-        style={[styles.card, selectedPlan === 'yearly' && styles.selectedCard]}
+        style={[
+          styles.card, 
+          styles.yearlyCard,
+          selectedPlan === 'yearly' && styles.selectedCard,
+        ]}
         onPress={() => handleSelectPlan('yearly')}
         accessibilityLabel="Select yearly plan"
         accessibilityRole="radio"
@@ -147,21 +151,27 @@ const styles = StyleSheet.create({
   },
   card: {
     width: '100%',
+    backgroundColor: '#FFFFFF',
     borderRadius: 16,
-    marginBottom: 12,
-    overflow: 'hidden',
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   selectedCard: {
     borderWidth: 2,
-    borderColor: '#D671A1',
-    shadowColor: '#D671A1',
+    borderColor: '#B56DA5',
+    shadowColor: '#B56DA5',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 2,
+  },
+  yearlyCard: {
+    backgroundColor: '#F5C6D7',
   },
   cardContent: {
     padding: 16,
@@ -205,18 +215,18 @@ const styles = StyleSheet.create({
   trialInfo: {
     fontFamily: 'Inter',
     fontSize: 12,
-    color: '#D671A1',
+    color: '#B56DA5',
     marginTop: 4,
     fontWeight: '500',
   },
   billingInfo: {
     fontFamily: 'Inter',
     fontSize: 12,
-    color: '#D671A1',
+    color: '#B56DA5',
     marginTop: 4,
   },
   saveBadge: {
-    backgroundColor: '#D671A1',
+    backgroundColor: '#B56DA5',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 999,
@@ -231,7 +241,7 @@ const styles = StyleSheet.create({
   },
   ctaButton: {
     width: '100%',
-    backgroundColor: '#D671A1',
+    backgroundColor: '#B56DA5',
     borderRadius: 999,
     paddingVertical: 16,
     alignItems: 'center',

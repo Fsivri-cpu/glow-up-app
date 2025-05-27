@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.65)', // Daha az bulanık overlay
+    backgroundColor: 'rgba(248, 225, 231, 0.65)', // F8E1E7 açık pembe overlay
   },
   container: {
     flex: 1,
