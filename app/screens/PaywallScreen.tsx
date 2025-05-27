@@ -12,8 +12,8 @@ import { router } from 'expo-router';
 import * as Haptics from 'expo-haptics';
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 import { Analytics } from '@/utils/analytics';
-import PricingCards, { PlanType } from '@/components/ui/PricingCards';
-import Button from '@/components/ui/Button';
+import PricingCards, { PlanType } from '../components/ui/PricingCards';
+import Button from '../components/ui/Button';
 
 /**
  * PaywallScreen - Displays subscription options with feature list
@@ -128,7 +128,7 @@ export default function PaywallScreen() {
             onPress={handleSubscribe}
             isLoading={isLoading}
             style={styles.subscribeButton}
-            accessibilityLabel="Subscribe to selected plan"
+            testID="subscribe-button"
           />
           <Text 
             style={styles.dismissText}

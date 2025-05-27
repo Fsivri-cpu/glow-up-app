@@ -41,13 +41,7 @@ export default function PricingCards({ selectedPlan, onSelectPlan }: PricingCard
     onSelectPlan(plan);
   };
   
-  // Handle subscribe button press
-  const handleSubscribe = () => {
-    // Provide haptic feedback
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    // Track subscription attempt
-    Analytics.trackButtonClick('try_for_free', 'paywall');
-  };
+
   
   return (
     <View style={[styles.container, { maxWidth }]}>
@@ -65,20 +59,24 @@ export default function PricingCards({ selectedPlan, onSelectPlan }: PricingCard
         accessibilityState={{ checked: selectedPlan === 'yearly' }}
       >
         <View style={styles.cardContent}>
-          <View style={styles.leftSection}>
-            <Text style={styles.planTitle}>Yearly Plan</Text>
-            <Text style={styles.yearlyPrice}>$44.99/year</Text>
-          </View>
-          
-          <View style={styles.middleSection}>
+          {/* SAVE Badge - Full Width */}
+          <View style={styles.saveBadgeContainer}>
             <View style={styles.saveBadge}>
               <Text style={styles.saveBadgeText}>SAVE 46%</Text>
             </View>
           </View>
           
-          <View style={styles.rightSection}>
-            <Text style={styles.planPrice}>$3.75/month</Text>
-            <Text style={styles.trialInfo}>7 Days Free Trial</Text>
+          {/* Card Content - Below the badge */}
+          <View style={styles.cardContentBelow}>
+            <View style={styles.leftSection}>
+              <Text style={styles.planTitle}>Yearly Plan</Text>
+              <Text style={styles.yearlyPrice}>$44.99/year</Text>
+            </View>
+            
+            <View style={styles.rightSection}>
+              <Text style={styles.planPrice}>$3.75/month</Text>
+              <Text style={styles.trialInfo}>7 Days Free Trial</Text>
+            </View>
           </View>
         </View>
       </Pressable>
@@ -92,47 +90,22 @@ export default function PricingCards({ selectedPlan, onSelectPlan }: PricingCard
         accessibilityState={{ checked: selectedPlan === 'monthly' }}
       >
         <View style={styles.cardContent}>
-          <View style={styles.leftSection}>
-            <Text style={styles.planTitle}>Monthly Plan</Text>
-          </View>
-          
-          <View style={styles.middleSection}>
-          </View>
-          
-          <View style={styles.rightSection}>
-            <Text style={styles.planPrice}>$6.99/month</Text>
-            <Text style={styles.billingInfo}>Billed Monthly</Text>
+          {/* Card Content - No badge for monthly plan */}
+          <View style={[styles.cardContentBelow, { marginTop: 16 }]}>
+            <View style={styles.leftSection}>
+              <Text style={styles.planTitle}>Monthly Plan</Text>
+            </View>
+            
+            <View style={styles.rightSection}>
+              <Text style={styles.planPrice}>$6.99/month</Text>
+              <Text style={styles.billingInfo}>Billed Monthly</Text>
+            </View>
           </View>
         </View>
       </Pressable>
       
-      {/* CTA Button */}
-      <Pressable 
-        style={styles.ctaButton}
-        onPress={handleSubscribe}
-        accessibilityLabel="Try for Free"
-        accessibilityRole="button"
-      >
-        <Text style={styles.ctaButtonText}>Try for Free</Text>
-      </Pressable>
-      
-      {/* Terms and Payment Info */}
-      <View style={styles.termsContainer}>
-        <View style={styles.termsTextContainer}>
-          <Text style={styles.termsText}>Terms | Privacy</Text>
-        </View>
-        
-        <View style={styles.paymentInfoContainer}>
-          <View style={styles.checkmarkContainer}>
-            <Text style={styles.checkmark}>✓</Text>
-          </View>
-          <Text style={styles.paymentInfoText}>No Payment Now</Text>
-        </View>
-        
-        <View style={styles.cancelContainer}>
-          <Text style={styles.cancelText}>Cancel Anytime</Text>
-        </View>
-      </View>
+
+
     </View>
   );
 }
@@ -141,44 +114,52 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     alignItems: 'center',
-    marginVertical: 24,
+    marginVertical: 16,
   },
   chooseText: {
     fontFamily: 'Manrope',
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 18,
+    fontWeight: '600',
     color: '#333333',
-    marginBottom: 20,
+    marginBottom: 16,
     textAlign: 'center',
   },
   card: {
     width: '100%',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 20,
     marginBottom: 12,
     overflow: 'hidden',
     borderWidth: 1,
     borderColor: '#E0E0E0',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 3,
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
     elevation: 1,
   },
   selectedCard: {
+    backgroundColor: '#EED2E7',
     borderWidth: 2,
     borderColor: '#B56DA5',
     shadowColor: '#B56DA5',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 2,
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    elevation: 3,
   },
   cardContent: {
-    padding: 16,
+    padding: 0,
+    position: 'relative',
+    paddingBottom: 16,
+  },
+  cardContentBelow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    width: '100%',
+    marginTop: 36,
+    paddingHorizontal: 16,
   },
   leftSection: {
     flex: 1,
@@ -207,97 +188,43 @@ const styles = StyleSheet.create({
   },
   planPrice: {
     fontFamily: 'Inter',
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 14,
+    fontWeight: '400',
     color: '#333333',
   },
+  saveBadgeContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 10,
+  },
   saveBadge: {
-    backgroundColor: '#D671A1',
+    backgroundColor: '#B56DA5',
     paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 999,
+    paddingVertical: 6,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    width: '100%',
+    alignItems: 'center',
   },
   saveBadgeText: {
-    fontFamily: 'Inter',
-    fontSize: 10,
-    fontWeight: 'bold',
     color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold',
+    fontFamily: 'Inter',
   },
   trialInfo: {
     fontFamily: 'Inter',
-    fontSize: 12,
-    color: '#D671A1',
+    fontSize: 14,
+    color: '#B56DA5',
+    fontWeight: 'bold',
     marginTop: 4,
   },
   billingInfo: {
     fontFamily: 'Inter',
-    fontSize: 12,
-    color: '#D671A1',
+    fontSize: 14,
+    color: '#666666',
     marginTop: 4,
-  },
-  ctaButton: {
-    width: '100%',
-    backgroundColor: '#D671A1',
-    borderRadius: 999,
-    paddingVertical: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-    marginBottom: 16,
-  },
-  ctaButtonText: {
-    fontFamily: 'Inter',
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  termsContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 16,
-  },
-  termsTextContainer: {
-    flex: 1,
-  },
-  termsText: {
-    fontFamily: 'Inter',
-    fontSize: 12,
-    color: '#666666',
-  },
-  paymentInfoContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  checkmarkContainer: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    backgroundColor: '#4CAF50',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 4,
-  },
-  checkmark: {
-    color: 'white',
-    fontSize: 10,
-    fontWeight: 'bold',
-  },
-  paymentInfoText: {
-    fontFamily: 'Inter',
-    fontSize: 12,
-    color: '#666666',
-  },
-  cancelContainer: {
-    flex: 1,
-    alignItems: 'flex-end',
-  },
-  cancelText: {
-    fontFamily: 'Inter',
-    fontSize: 12,
-    color: '#666666',
-  },
+  }
 });
