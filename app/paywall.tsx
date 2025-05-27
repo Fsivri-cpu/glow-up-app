@@ -161,8 +161,8 @@ const styles = StyleSheet.create({
   titleContainer: {
     width: '100%',
     alignItems: 'center',
-    marginTop: 24,
-    marginBottom: 24,
+    marginTop: 16,
+    marginBottom: 32,
   },
   title: {
     fontFamily: 'Manrope',
@@ -185,11 +185,12 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingBottom: 40,
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   featuresContainer: {
     width: '100%',
-    marginBottom: 24,
-    marginTop: 16,
+    marginBottom: 32,
+    marginTop: 0,
   },
   featuresTitle: {
     fontFamily: 'Manrope',
@@ -201,7 +202,7 @@ const styles = StyleSheet.create({
   featureItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 20,
   },
   featureIcon: {
     fontSize: 16,
