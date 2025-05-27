@@ -81,18 +81,26 @@ export default function PricingCards({ selectedPlan, onSelectPlan }: PricingCard
           accessibilityState={{ checked: selectedPlan === 'yearly' }}
         >
           <View style={styles.cardRow}>
-            <Text style={styles.planTitle}>Yearly Plan</Text>
-            <Text style={styles.planPrice}>$0.77/week</Text>
-          </View>
-          
-          <View style={styles.cardRow}>
-            <View style={styles.subInfoContainer}>
-              <Text style={styles.subInfo}>$39.99/year</Text>
+            {/* Left section */}
+            <View style={styles.cardSection}>
+              <Text style={styles.planTitle}>Yearly Plan</Text>
+              <View style={styles.subInfoContainer}>
+                <Text style={styles.subInfo}>$39.99/year</Text>
+              </View>
+            </View>
+            
+            {/* Middle section */}
+            <View style={styles.cardSection}>
               <View style={styles.saveBadge}>
                 <Text style={styles.saveBadgeText}>SAVE 89%</Text>
               </View>
             </View>
-            <Text style={styles.trialInfo}>3 Days Free Trial</Text>
+            
+            {/* Right section */}
+            <View style={styles.cardSection}>
+              <Text style={styles.planPrice}>$0.77/week</Text>
+              <Text style={styles.trialInfo}>3 Days Free Trial</Text>
+            </View>
           </View>
         </Pressable>
       </Animated.View>
@@ -112,13 +120,22 @@ export default function PricingCards({ selectedPlan, onSelectPlan }: PricingCard
           accessibilityState={{ checked: selectedPlan === 'weekly' }}
         >
           <View style={styles.cardRow}>
-            <Text style={styles.planTitle}>Weekly Plan</Text>
-            <Text style={styles.planPrice}>$6.99/week</Text>
-          </View>
-          
-          <View style={styles.cardRow}>
-            <View />
-            <Text style={styles.weeklyBillingInfo}>Billed Weekly</Text>
+            {/* Left section */}
+            <View style={styles.cardSection}>
+              <Text style={styles.planTitle}>Weekly Plan</Text>
+              <View />
+            </View>
+            
+            {/* Middle section */}
+            <View style={styles.cardSection}>
+              <Text style={styles.weeklyBillingInfo}>Billed Weekly</Text>
+            </View>
+            
+            {/* Right section */}
+            <View style={styles.cardSection}>
+              <Text style={styles.planPrice}>$6.99/week</Text>
+              <View />
+            </View>
           </View>
         </Pressable>
       </Animated.View>
@@ -163,8 +180,14 @@ const styles = StyleSheet.create({
   cardRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'stretch',
     marginBottom: 8,
+  },
+  cardSection: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 8,
   },
   planTitle: {
     fontFamily: 'Manrope',
