@@ -170,28 +170,28 @@ export default function PaywallScreen({ onClose }: PaywallScreenProps) {
             >
               <View style={styles.featureItem}>
                 <View style={styles.featureIconContainer}>
-                  <Ionicons name="book-outline" size={24} color="#333333" />
+                  <Text style={styles.featureEmoji}>📚</Text>
                 </View>
                 <Text style={styles.featureText}>Unlimited habit & routine tracking</Text>
               </View>
               
               <View style={styles.featureItem}>
                 <View style={styles.featureIconContainer}>
-                  <Ionicons name="sparkles-outline" size={24} color="#333333" />
+                  <Text style={styles.featureEmoji}>✨</Text>
                 </View>
                 <Text style={styles.featureText}>Personalized glow-up challenges</Text>
               </View>
               
               <View style={styles.featureItem}>
                 <View style={styles.featureIconContainer}>
-                  <Ionicons name="diamond-outline" size={24} color="#333333" />
+                  <Text style={styles.featureEmoji}>💎</Text>
                 </View>
                 <Text style={styles.featureText}>Premium themes & customization</Text>
               </View>
               
               <View style={styles.featureItem}>
                 <View style={styles.featureIconContainer}>
-                  <Ionicons name="notifications-outline" size={24} color="#333333" />
+                  <Text style={styles.featureEmoji}>🔔</Text>
                 </View>
                 <Text style={styles.featureText}>Gentle reminders that keep you going</Text>
               </View>
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.85)', // Semi-transparent overlay
+    backgroundColor: 'rgba(255, 255, 255, 0.65)', // Daha az bulanık overlay
   },
   container: {
     flex: 1,
@@ -301,11 +301,16 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   featureIconContainer: {
-    width: 40,
-    height: 40,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: '#F8E1E7',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
+  },
+  featureEmoji: {
+    fontSize: 20,
   },
   featureText: {
     fontFamily: 'Inter',
