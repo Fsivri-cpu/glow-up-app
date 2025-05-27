@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Glow Up Logo</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle fill="#F8E1E7" cx="100" cy="100" r="100"></circle>
+        <path d="M100,40 C122.091,40 140,57.909 140,80 C140,102.091 122.091,120 100,120 C77.909,120 60,102.091 60,80 C60,57.909 77.909,40 100,40 Z" fill="#B56DA5"></path>
+        <path d="M100,130 C127.614,130 150,152.386 150,180 L50,180 C50,152.386 72.386,130 100,130 Z" fill="#B56DA5"></path>
+        <circle fill="#FFFFFF" cx="80" cy="80" r="10"></circle>
+        <circle fill="#FFFFFF" cx="120" cy="80" r="10"></circle>
+        <path d="M90,100 C93.333,106.667 100,106.667 110,100" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"></path>
+    </g>
+</svg>

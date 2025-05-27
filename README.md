@@ -1,8 +1,28 @@
-# Welcome to your Expo app 👋
+# Glow Up - Mobile App for Self-Growth and Wellness
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+![Glow Up Logo](./assets/images/glowup_logo.svg)
 
-## Get started
+Glow Up is a mobile app designed for women focused on self-growth, wellness, and habit tracking. The app emphasizes elegance, motivation, and glow-up challenges. Built with React Native and Expo, it runs on both iOS and Android platforms.
+
+## Features
+
+- **Personalized Onboarding**: Customize your experience with name, icon selection, and goal setting
+- **Daily Task Tracking**: Monitor your daily habits and routines
+- **Glow-Up Challenges**: Discover and participate in various self-improvement challenges
+- **Progress Tracking**: View your journey with streaks, badges, and weekly progress
+- **Elegant UI**: Beautiful, responsive design that works across all device sizes
+
+## Tech Stack
+
+- **Framework**: React Native with TypeScript
+- **Runtime**: Expo Managed Workflow
+- **Navigation**: React Navigation (stack and tab navigators)
+- **Styling**: NativeWind (Tailwind CSS for React Native)
+- **State Management**: Context API with useReducer
+- **Fonts**: Manrope for headings, Inter for body text
+- **Icons**: Ionicons and SF Symbols
+
+## Getting Started
 
 1. Install dependencies
 
@@ -16,35 +36,54 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+3. Open the app in your preferred environment:
+   - iOS Simulator
+   - Android Emulator
+   - Physical device using Expo Go
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Project Structure
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```plaintext
+/app                  # Main application code using file-based routing
+  /(tabs)             # Tab-based navigation screens
+    index.tsx         # Home screen
+    explore.tsx       # Explore challenges screen
+    journey.tsx       # Progress tracking screen
+    profile.tsx       # User profile and settings
+  /onboarding         # Onboarding flow screens
+  splash.tsx          # Splash screen
+  welcome.tsx         # Welcome screen
+  paywall.tsx         # Subscription options
+/assets               # Images, fonts, and other static assets
+/components           # Reusable UI components
+/context              # Application state management
+/constants            # App constants and theme
+/hooks                # Custom React hooks
+/types                # TypeScript type definitions
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Design System
 
-## Learn more
+- **Typography**:
+  - Titles: Manrope, 28pt
+  - Body: Inter, 16pt
+  - Buttons: Inter SemiBold, 18pt
 
-To learn more about developing your project with Expo, look at the following resources:
+- **Color Palette**:
+  - Blush Pink (#F8E1E7): App background
+  - Plum Purple (#B56DA5): Primary color, buttons
+  - Charcoal (#333333): Main text
+  - Medium Gray (#666666): Secondary text
+  - Soft Gray (#999999): Placeholders
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Roadmap
 
-## Join the community
+- Integration with RevenueCat for payments
+- Push notifications via Expo Notifications
+- Firebase analytics integration
+- Social sharing features
+- Community challenges
 
-Join our community of developers creating universal apps.
+## License
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+This project is proprietary and confidential.
