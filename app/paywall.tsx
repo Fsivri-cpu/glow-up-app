@@ -38,7 +38,7 @@ export default function PaywallScreen({ onClose }: PaywallScreenProps) {
 
   // Features list for Pro plan
   const features = [
-    { icon: '📚', text: 'Unlimited habit & routine tracking' },
+    { icon: '📖', text: 'Unlimited habit & routine tracking' },
     { icon: '✨', text: 'Personalized glow-up challenges' },
     { icon: '💎', text: 'Premium themes & customization' },
     { icon: '🔔', text: 'Gentle reminders that keep you going' }
@@ -116,11 +116,9 @@ export default function PaywallScreen({ onClose }: PaywallScreenProps) {
         {/* Header */}
         <Animated.View 
           entering={FadeIn.duration(600)}
+          style={styles.titleContainer}
         >
-          <TitleBlock 
-            title="Unlock Premium Features"
-            subtitle="Take your glow-up journey to the next level"
-          />
+          <Text style={styles.title}>Why upgrade to Pro?</Text>
         </Animated.View>
           
         {/* Feature List */}
@@ -128,7 +126,6 @@ export default function PaywallScreen({ onClose }: PaywallScreenProps) {
           style={styles.featuresContainer}
           entering={FadeInDown.delay(300).duration(600)}
         >
-          <Text style={styles.featuresTitle}>GlowUp Pro Includes:</Text>
           {features.map((feature, index) => (
             <View key={index} style={styles.featureItem}>
               <Text style={styles.featureIcon}>{feature.icon}</Text>
@@ -148,17 +145,11 @@ export default function PaywallScreen({ onClose }: PaywallScreenProps) {
           />
         </Animated.View>
 
-        {/* CTA Button */}
+        {/* Maybe Later Button */}
         <Animated.View 
-          style={styles.ctaContainer}
+          style={styles.dismissContainer}
           entering={FadeInDown.delay(900).duration(600)}
         >
-          <Button
-            title={`Continue with ${selectedPlan === 'yearly' ? 'Yearly' : 'Weekly'} Plan`}
-            onPress={handleSubscribe}
-            isLoading={isLoading}
-            style={styles.subscribeButton}
-          />
           <Pressable 
             onPress={handleDismiss}
             style={styles.dismissButton}
@@ -182,6 +173,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F8E1E7',
+  },
+  titleContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 24,
+    marginBottom: 24,
+  },
+  title: {
+    fontFamily: 'Manrope',
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#333333',
+    textAlign: 'center',
   },
   header: {
     flexDirection: 'row',
@@ -225,16 +229,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333333',
   },
-  ctaContainer: {
+  dismissContainer: {
     width: '100%',
     alignItems: 'center',
     marginTop: 8,
-  },
-  subscribeButton: {
-    width: '100%',
-    height: 56,
-    backgroundColor: '#B56DA5',
-    borderRadius: 28,
   },
   dismissButton: {
     padding: 12,

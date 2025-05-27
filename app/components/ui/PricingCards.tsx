@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  Pressable, 
-  useWindowDimensions 
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  useWindowDimensions
 } from 'react-native';
-import Animated, { 
-  useSharedValue, 
-  useAnimatedStyle, 
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
   withTiming,
-  interpolate,
-  Extrapolate
+  FadeIn,
 } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
 import { Analytics } from '@/utils/analytics';
@@ -21,14 +20,13 @@ export type PlanType = 'monthly' | 'yearly';
 interface PricingCardsProps {
   selectedPlan: PlanType;
   onSelectPlan: (plan: PlanType) => void;
-  onSubscribe: () => void;
 }
 
 /**
- * PricingCards component for displaying subscription options
+ * PricingCards component displays subscription options
  * with clear comparison and aesthetic layout
  */
-export default function PricingCards({ selectedPlan, onSelectPlan, onSubscribe }: PricingCardsProps) {
+export default function PricingCards({ selectedPlan, onSelectPlan }: PricingCardsProps) {
   const { width } = useWindowDimensions();
   const maxWidth = Math.min(width - 48, 480);
   
@@ -36,7 +34,6 @@ export default function PricingCards({ selectedPlan, onSelectPlan, onSubscribe }
   const handleSelectPlan = (plan: PlanType) => {
     // Provide haptic feedback
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    
     // Track selection
     Analytics.trackButtonClick(`select_${plan}_plan`, 'paywall');
     
@@ -44,9 +41,12 @@ export default function PricingCards({ selectedPlan, onSelectPlan, onSubscribe }
     onSelectPlan(plan);
   };
   
-  // Determine button text based on selected plan
-  const getButtonText = () => {
-    return selectedPlan === 'yearly' ? 'Try for Free' : 'Start Now';
+  // Handle subscribe button press
+  const handleSubscribe = () => {
+    // Provide haptic feedback
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    // Track subscription attempt
+    Analytics.trackButtonClick('try_for_free', 'paywall');
   };
   
   return (
@@ -57,7 +57,6 @@ export default function PricingCards({ selectedPlan, onSelectPlan, onSubscribe }
       <Pressable 
         style={[
           styles.card, 
-          styles.yearlyCard,
           selectedPlan === 'yearly' && styles.selectedCard,
         ]}
         onPress={() => handleSelectPlan('yearly')}
@@ -66,18 +65,18 @@ export default function PricingCards({ selectedPlan, onSelectPlan, onSubscribe }
         accessibilityState={{ checked: selectedPlan === 'yearly' }}
       >
         <View style={styles.cardContent}>
-          <View style={styles.planTitleContainer}>
+          <View style={styles.leftSection}>
             <Text style={styles.planTitle}>Yearly Plan</Text>
             <Text style={styles.yearlyPrice}>$44.99/year</Text>
           </View>
           
-          <View style={styles.saveBadgeContainer}>
+          <View style={styles.middleSection}>
             <View style={styles.saveBadge}>
               <Text style={styles.saveBadgeText}>SAVE 46%</Text>
             </View>
           </View>
           
-          <View style={styles.priceContainer}>
+          <View style={styles.rightSection}>
             <Text style={styles.planPrice}>$3.75/month</Text>
             <Text style={styles.trialInfo}>7 Days Free Trial</Text>
           </View>
@@ -93,11 +92,14 @@ export default function PricingCards({ selectedPlan, onSelectPlan, onSubscribe }
         accessibilityState={{ checked: selectedPlan === 'monthly' }}
       >
         <View style={styles.cardContent}>
-          <View style={styles.planTitleContainer}>
+          <View style={styles.leftSection}>
             <Text style={styles.planTitle}>Monthly Plan</Text>
           </View>
           
-          <View style={styles.priceContainer}>
+          <View style={styles.middleSection}>
+          </View>
+          
+          <View style={styles.rightSection}>
             <Text style={styles.planPrice}>$6.99/month</Text>
             <Text style={styles.billingInfo}>Billed Monthly</Text>
           </View>
@@ -107,11 +109,11 @@ export default function PricingCards({ selectedPlan, onSelectPlan, onSubscribe }
       {/* CTA Button */}
       <Pressable 
         style={styles.ctaButton}
-        onPress={onSubscribe}
-        accessibilityLabel={getButtonText()}
+        onPress={handleSubscribe}
+        accessibilityLabel="Try for Free"
         accessibilityRole="button"
       >
-        <Text style={styles.ctaButtonText}>{getButtonText()}</Text>
+        <Text style={styles.ctaButtonText}>Try for Free</Text>
       </Pressable>
       
       {/* Terms and Payment Info */}
@@ -153,13 +155,10 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#FFFFFF',
     borderRadius: 16,
-    padding: 16,
     marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
   },
   selectedCard: {
     borderWidth: 2,
@@ -170,20 +169,24 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 2,
   },
-  yearlyCard: {
-    backgroundColor: '#F5C6D7',
-  },
   cardContent: {
     padding: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    position: 'relative',
   },
-  planTitleContainer: {
+  leftSection: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'flex-start',
+  },
+  middleSection: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  rightSection: {
+    flex: 1,
+    alignItems: 'flex-end',
   },
   planTitle: {
     fontFamily: 'Manrope',
@@ -191,14 +194,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333333',
   },
-  priceContainer: {
-    flex: 1,
-    alignItems: 'flex-end',
-  },
-  saveBadgeContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  yearlyPrice: {
+    fontFamily: 'Inter',
+    fontSize: 14,
+    color: '#666666',
+    marginTop: 4,
   },
   planPrice: {
     fontFamily: 'Inter',
@@ -206,32 +206,11 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#333333',
   },
-  yearlyPrice: {
-    fontFamily: 'Inter',
-    fontSize: 14,
-    color: '#666666',
-    marginTop: 2,
-  },
-  trialInfo: {
-    fontFamily: 'Inter',
-    fontSize: 12,
-    color: '#B56DA5',
-    marginTop: 4,
-    fontWeight: '500',
-  },
-  billingInfo: {
-    fontFamily: 'Inter',
-    fontSize: 12,
-    color: '#B56DA5',
-    marginTop: 4,
-  },
   saveBadge: {
-    backgroundColor: '#B56DA5',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    backgroundColor: '#D671A1',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
     borderRadius: 999,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   saveBadgeText: {
     fontFamily: 'Inter',
@@ -239,9 +218,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
+  trialInfo: {
+    fontFamily: 'Inter',
+    fontSize: 12,
+    color: '#D671A1',
+    marginTop: 4,
+  },
+  billingInfo: {
+    fontFamily: 'Inter',
+    fontSize: 12,
+    color: '#D671A1',
+    marginTop: 4,
+  },
   ctaButton: {
     width: '100%',
-    backgroundColor: '#B56DA5',
+    backgroundColor: '#D671A1',
     borderRadius: 999,
     paddingVertical: 16,
     alignItems: 'center',
